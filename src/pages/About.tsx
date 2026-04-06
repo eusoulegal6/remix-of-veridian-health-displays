@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import {
   ArrowRight,
   Heart,
@@ -10,6 +11,7 @@ import {
   Target,
   Sparkles,
 } from "lucide-react";
+import { PUBLIC_CTA_PATHS } from "@/routes/paths";
 
 import heroImg from "@/assets/hero-signage-overview.jpg";
 import waitingCalm from "@/assets/waiting-room-calm.jpg";
@@ -223,10 +225,10 @@ const About = () => {
                     className="px-8 text-base gap-2 bg-white text-primary hover:bg-white/90"
                     asChild
                   >
-                    <a href="#">
+                    <Link to={PUBLIC_CTA_PATHS.startFreeTrial}>
                       Start Free Trial
                       <ArrowRight className="w-4 h-4" />
-                    </a>
+                    </Link>
                   </Button>
                   <Button
                     size="lg"
@@ -234,7 +236,7 @@ const About = () => {
                     className="px-8 text-base border-white/30 text-white hover:bg-white/10 hover:text-white"
                     asChild
                   >
-                    <a href="/contact">Talk to Sales</a>
+                    <Link to={PUBLIC_CTA_PATHS.talkToSales}>Talk to Sales</Link>
                   </Button>
                 </div>
               </div>
