@@ -38,7 +38,8 @@ export const MARKETING_SITE = {
   defaultTitle: "MedScreen | Smarter Screens for Better Care",
   defaultDescription:
     "MedScreen is a premium digital signage platform for hospitals, clinics, waiting rooms, and dental offices.",
-  defaultSocialImage: "/placeholder.svg",
+  defaultSocialImage:
+    "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1ddf70e8-7a93-4f83-b844-62bb6fc9c3a4/id-preview-4712bd44--23463a5f-3fb0-4326-83f5-7054389fa4b7.lovable.app-1775350350456.png",
   twitterSite: "@MedScreen",
 } as const;
 
