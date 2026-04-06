@@ -1,23 +1,14 @@
 import MedScreenLogo from "./MedScreenLogo";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-
-const useCaseLinks = [
-  { label: "Hospitals", href: "/hospitals" },
-  { label: "Clinics", href: "/clinics" },
-  { label: "Dental Offices", href: "/dental-offices" },
-  { label: "Waiting Rooms", href: "/waiting-rooms" },
-];
-
-const mainLinks = [
-  { label: "Features", href: "/features" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "FAQ", href: "/faq" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+import {
+  MAIN_NAV_LINKS,
+  PUBLIC_CTA_PATHS,
+  PUBLIC_PATHS,
+  USE_CASE_LINKS,
+} from "@/routes/paths";
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -26,19 +17,18 @@ const Header = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileOpen(false);
     setMobileUseCasesOpen(false);
   }, [location.pathname]);
 
-  // Close desktop dropdown on outside click
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+    const handler = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setUseCasesOpen(false);
       }
     };
+
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
@@ -46,31 +36,34 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between">
-        <Link to="/" className="flex-shrink-0">
+        <Link to={PUBLIC_PATHS.home} className="flex-shrink-0">
           <MedScreenLogo />
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-6">
           <Link
-            to="/features"
+            to={PUBLIC_PATHS.features}
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
             Features
           </Link>
 
-          {/* Use Cases dropdown */}
           <div ref={dropdownRef} className="relative">
             <button
               onClick={() => setUseCasesOpen(!useCasesOpen)}
               className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               Use Cases
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${useCasesOpen ? "rotate-180" : ""}`} />
+              <ChevronDown
+                className={`w-3.5 h-3.5 transition-transform ${
+                  useCasesOpen ? "rotate-180" : ""
+                }`}
+              />
             </button>
+
             {useCasesOpen && (
               <div className="absolute top-full left-0 mt-2 w-48 rounded-xl border bg-card shadow-lg py-2 z-50">
-                {useCaseLinks.map((link) => (
+                {USE_CASE_LINKS.map((link) => (
                   <Link
                     key={link.href}
                     to={link.href}
@@ -84,38 +77,23 @@ const Header = () => {
             )}
           </div>
 
-          <Link
-            to="/pricing"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Pricing
-          </Link>
-          <Link
-            to="/faq"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            FAQ
-          </Link>
-          <Link
-            to="/about"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            About
-          </Link>
-          <Link
-            to="/contact"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Contact
-          </Link>
+          {MAIN_NAV_LINKS.filter((link) => link.label !== "Features").map((link) => (
+            <Link
+              key={link.href}
+              to={link.href}
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
           <Button variant="ghost" size="sm" asChild>
-            <a href="#">Log in</a>
+            <Link to={PUBLIC_CTA_PATHS.pricing}>Pricing</Link>
           </Button>
           <Button size="sm" asChild>
-            <a href="#">Start Free</a>
+            <Link to={PUBLIC_CTA_PATHS.bookDemo}>Book Demo</Link>
           </Button>
         </div>
 
@@ -128,28 +106,31 @@ const Header = () => {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <div className="lg:hidden border-t bg-background max-h-[calc(100vh-4rem)] overflow-y-auto">
           <div className="container py-4 flex flex-col gap-1">
             <Link
-              to="/features"
+              to={PUBLIC_PATHS.features}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-3 px-2 rounded-lg hover:bg-muted/50"
             >
               Features
             </Link>
 
-            {/* Mobile Use Cases accordion */}
             <button
               onClick={() => setMobileUseCasesOpen(!mobileUseCasesOpen)}
               className="flex items-center justify-between text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-3 px-2 rounded-lg hover:bg-muted/50"
             >
               Use Cases
-              <ChevronDown className={`w-4 h-4 transition-transform ${mobileUseCasesOpen ? "rotate-180" : ""}`} />
+              <ChevronDown
+                className={`w-4 h-4 transition-transform ${
+                  mobileUseCasesOpen ? "rotate-180" : ""
+                }`}
+              />
             </button>
+
             {mobileUseCasesOpen && (
               <div className="pl-4 flex flex-col gap-1">
-                {useCaseLinks.map((link) => (
+                {USE_CASE_LINKS.map((link) => (
                   <Link
                     key={link.href}
                     to={link.href}
@@ -161,7 +142,7 @@ const Header = () => {
               </div>
             )}
 
-            {mainLinks.filter(l => l.label !== "Features").map((link) => (
+            {MAIN_NAV_LINKS.filter((link) => link.label !== "Features").map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
@@ -173,10 +154,10 @@ const Header = () => {
 
             <div className="flex flex-col gap-2 pt-3 mt-2 border-t">
               <Button variant="outline" size="sm" asChild>
-                <a href="#">Log in</a>
+                <Link to={PUBLIC_CTA_PATHS.pricing}>Pricing</Link>
               </Button>
               <Button size="sm" asChild>
-                <a href="#">Start Free</a>
+                <Link to={PUBLIC_CTA_PATHS.bookDemo}>Book Demo</Link>
               </Button>
             </div>
           </div>

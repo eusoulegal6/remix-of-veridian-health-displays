@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import {
   ArrowRight,
   Check,
@@ -17,6 +18,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useState } from "react";
+import { PUBLIC_CTA_PATHS } from "@/routes/paths";
 
 const plans = [
   {
@@ -241,10 +243,16 @@ const Pricing = () => {
                     variant={plan.popular ? "default" : "secondary"}
                     asChild
                   >
-                    <a href="#">
+                    <Link
+                      to={
+                        plan.cta === "Talk to Sales"
+                          ? PUBLIC_CTA_PATHS.talkToSales
+                          : PUBLIC_CTA_PATHS.startFreeTrial
+                      }
+                    >
                       {plan.cta}
                       <ArrowRight className="w-4 h-4" />
-                    </a>
+                    </Link>
                   </Button>
 
                   <ul className="space-y-3 flex-1">
@@ -366,10 +374,10 @@ const Pricing = () => {
                     className="px-8 text-base gap-2 bg-white text-primary hover:bg-white/90"
                     asChild
                   >
-                    <a href="#">
+                    <Link to={PUBLIC_CTA_PATHS.startFreeTrial}>
                       Start Free Trial
                       <ArrowRight className="w-4 h-4" />
-                    </a>
+                    </Link>
                   </Button>
                   <Button
                     size="lg"
@@ -377,7 +385,7 @@ const Pricing = () => {
                     className="px-8 text-base border-white/30 text-white hover:bg-white/10 hover:text-white"
                     asChild
                   >
-                    <a href="#">Talk to Sales</a>
+                    <Link to={PUBLIC_CTA_PATHS.talkToSales}>Talk to Sales</Link>
                   </Button>
                 </div>
               </div>

@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import {
   ArrowRight,
   CheckCircle2,
@@ -14,6 +15,7 @@ import {
   UtensilsCrossed,
   Radio,
 } from "lucide-react";
+import { PUBLIC_CTA_PATHS } from "@/routes/paths";
 
 import heroImg from "@/assets/hero-signage-overview.jpg";
 import hallwayImg from "@/assets/hospital-hallway-display.jpg";
@@ -158,10 +160,10 @@ const Hospitals = () => {
               </p>
               <div className="flex flex-col sm:flex-row items-start gap-4 pt-2">
                 <Button size="lg" className="px-8 text-base gap-2" asChild>
-                  <a href="#">
+                  <Link to={PUBLIC_CTA_PATHS.startFreeTrial}>
                     Start Free Trial
                     <ArrowRight className="w-4 h-4" />
-                  </a>
+                  </Link>
                 </Button>
                 <Button
                   size="lg"
@@ -169,7 +171,7 @@ const Hospitals = () => {
                   className="px-8 text-base border-white/30 text-white hover:bg-white/10 hover:text-white"
                   asChild
                 >
-                  <a href="#">Request a Demo</a>
+                  <Link to={PUBLIC_CTA_PATHS.requestDemo}>Request a Demo</Link>
                 </Button>
               </div>
             </div>
@@ -321,10 +323,10 @@ const Hospitals = () => {
                       className="px-8 text-base gap-2 bg-white text-primary hover:bg-white/90"
                       asChild
                     >
-                      <a href="#">
+                      <Link to={PUBLIC_CTA_PATHS.startFreeTrial}>
                         Start Free Trial
                         <ArrowRight className="w-4 h-4" />
-                      </a>
+                      </Link>
                     </Button>
                     <Button
                       size="lg"
@@ -332,7 +334,7 @@ const Hospitals = () => {
                       className="px-8 text-base border-white/30 text-white hover:bg-white/10 hover:text-white"
                       asChild
                     >
-                      <a href="#">Talk to Sales</a>
+                      <Link to={PUBLIC_CTA_PATHS.talkToSales}>Talk to Sales</Link>
                     </Button>
                   </div>
                 </div>

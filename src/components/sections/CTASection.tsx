@@ -1,13 +1,14 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import hospitalImg from "@/assets/hospital-hallway-display.jpg";
+import { PUBLIC_CTA_PATHS } from "@/routes/paths";
 
 const CTASection = () => {
   return (
     <section className="py-20 md:py-28">
       <div className="container">
         <div className="relative rounded-2xl overflow-hidden">
-          {/* Background image */}
           <img
             src={hospitalImg}
             alt="Hospital hallway with digital wayfinding display"
@@ -24,7 +25,8 @@ const CTASection = () => {
                 Ready to upgrade your patient experience?
               </h2>
               <p className="text-lg text-white/80 max-w-xl mx-auto">
-                Join hundreds of healthcare facilities already using MedScreen to power their digital displays.
+                Join hundreds of healthcare facilities already using MedScreen
+                to power their digital displays.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
                 <Button
@@ -32,10 +34,10 @@ const CTASection = () => {
                   className="px-8 text-base gap-2 bg-white text-primary hover:bg-white/90"
                   asChild
                 >
-                  <a href="#">
+                  <Link to={PUBLIC_CTA_PATHS.startFreeTrial}>
                     Start Free Trial
                     <ArrowRight className="w-4 h-4" />
-                  </a>
+                  </Link>
                 </Button>
                 <Button
                   size="lg"
@@ -43,7 +45,7 @@ const CTASection = () => {
                   className="px-8 text-base border-white/30 text-white hover:bg-white/10 hover:text-white"
                   asChild
                 >
-                  <a href="#">Talk to Sales</a>
+                  <Link to={PUBLIC_CTA_PATHS.talkToSales}>Talk to Sales</Link>
                 </Button>
               </div>
             </div>
