@@ -11,7 +11,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import "./index.css";
 
 export const links = () => [
-  { rel: "icon", type: "image/png", href: "/favicon.png" },
+  { rel: "icon", type: "image/png", href: "/favicon-v2.png" },
 ];
 
 export function Layout({
