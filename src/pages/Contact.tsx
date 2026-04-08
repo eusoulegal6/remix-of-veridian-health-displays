@@ -150,7 +150,8 @@ const Contact = () => {
     window.location.href = href;
   };
 
-  const onSubmit = form.handleSubmit(async (values) => {
+  const onSubmit = form.handleSubmit(async (values: ContactFormValues) => {
+    const lead = values as ContactLead;
     setIsSubmitting(true);
 
     if (contactEndpoint) {
