@@ -10,8 +10,28 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import "./index.css";
 
+const faviconVersion = "20260408";
+
 export const links = () => [
-  { rel: "icon", type: "image/png", href: "/favicon-v2.png" },
+  {
+    rel: "icon",
+    type: "image/png",
+    sizes: "512x512",
+    href: `/favicon-v2.png?v=${faviconVersion}`,
+  },
+  {
+    rel: "icon",
+    type: "image/x-icon",
+    href: `/favicon.ico?v=${faviconVersion}`,
+  },
+  {
+    rel: "shortcut icon",
+    href: `/favicon.ico?v=${faviconVersion}`,
+  },
+  {
+    rel: "apple-touch-icon",
+    href: `/favicon-v2.png?v=${faviconVersion}`,
+  },
 ];
 
 export function Layout({
