@@ -150,7 +150,8 @@ const Contact = () => {
     window.location.href = href;
   };
 
-  const onSubmit = form.handleSubmit(async (values) => {
+  const onSubmit = form.handleSubmit(async (values: ContactFormValues) => {
+    const lead = values as ContactLead;
     setIsSubmitting(true);
 
     if (contactEndpoint) {
@@ -162,7 +163,7 @@ const Contact = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(
-            createContactSubmissionFields(values, {
+            createContactSubmissionFields(lead, {
               source,
               pagePath: `${location.pathname}${location.search}`,
             }),
@@ -181,7 +182,7 @@ const Contact = () => {
         form.reset(createDefaultValues(intent, source));
         return;
       } catch {
-        handleFallbackToEmail(values);
+        handleFallbackToEmail(lead);
         toast({
           title: "Email draft opened",
           description:
@@ -194,7 +195,7 @@ const Contact = () => {
       }
     }
 
-    handleFallbackToEmail(values);
+    handleFallbackToEmail(lead);
     toast({
       title: "Email draft opened",
       description:
