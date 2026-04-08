@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/hero-signage-overview.jpg";
-import { PUBLIC_CTA_PATHS } from "@/routes/paths";
+import { PUBLIC_CTA_PATHS, PUBLIC_PATHS } from "@/routes/paths";
 
 const HeroSection = () => {
   return (
@@ -49,9 +49,9 @@ const HeroSection = () => {
               className="px-8 text-base gap-2 border-white/30 text-white hover:bg-white/10 hover:text-white"
               asChild
             >
-              <Link to={PUBLIC_CTA_PATHS.watchDemo}>
-                <Play className="w-4 h-4" />
-                Watch Demo
+              <Link to={PUBLIC_PATHS.features}>
+                Explore Features
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
           </div>
