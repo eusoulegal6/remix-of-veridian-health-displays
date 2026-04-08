@@ -1,3 +1,6 @@
+/// <reference lib="dom" />
+/// <reference types="vite/client" />
+
 export const CONTACT_INTENTS = {
   trial: "trial",
   demo: "demo",

@@ -1,3 +1,6 @@
+/// <reference lib="dom" />
+/// <reference types="vite/client" />
+
 export type SocialMetadata = {
   title?: string;
   description?: string;
