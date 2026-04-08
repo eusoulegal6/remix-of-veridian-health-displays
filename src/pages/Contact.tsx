@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -32,14 +32,15 @@ import {
   CONTACT_INTENTS,
   type ContactLead,
   buildContactMailtoHref,
+  CONTACT_FORM_ID,
   createContactMessageTemplate,
   createContactSubmissionFields,
   getContactEmail,
   getContactEndpoint,
   hasContactEndpoint,
   resolveContactIntent,
+  scrollToContactForm,
 } from "@/lib/contact-funnel";
-import { PUBLIC_CTA_PATHS } from "@/routes/paths";
 
 const contactSchema = z.object({
   firstName: z.string().trim().min(2, "Enter your first name."),
@@ -82,6 +83,20 @@ const createDefaultValues = (
   message: createContactMessageTemplate(intent, source),
 });
 
+const shouldReplaceMessageTemplate = (
+  currentMessage: string,
+  currentIntent: ContactFormValues["intent"],
+  currentSource?: string | null,
+) => {
+  const normalizedMessage = currentMessage.trim();
+  if (!normalizedMessage) {
+    return true;
+  }
+
+  return normalizedMessage ===
+    createContactMessageTemplate(currentIntent, currentSource).trim();
+};
+
 const Contact = () => {
   const { toast } = useToast();
   const location = useLocation();
@@ -103,6 +118,27 @@ const Contact = () => {
   useEffect(() => {
     form.reset(createDefaultValues(intent, source));
   }, [form, intent, source]);
+
+  const switchContactIntent = (nextIntent: ContactFormValues["intent"]) => {
+    const currentIntent = form.getValues("intent");
+    const currentMessage = form.getValues("message");
+
+    form.setValue("intent", nextIntent, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+
+    if (shouldReplaceMessageTemplate(currentMessage, currentIntent, source)) {
+      form.setValue("message", createContactMessageTemplate(nextIntent, source), {
+        shouldDirty: true,
+        shouldTouch: true,
+        shouldValidate: true,
+      });
+    }
+
+    scrollToContactForm();
+  };
 
   const handleFallbackToEmail = (values: ContactLead) => {
     const href = buildContactMailtoHref(values, {
@@ -190,7 +226,10 @@ const Contact = () => {
         <section className="pb-20 md:pb-28 -mt-4">
           <div className="container">
             <div className="grid lg:grid-cols-5 gap-10 lg:gap-16 max-w-5xl mx-auto">
-              <div className="lg:col-span-3 rounded-2xl border bg-card p-6 md:p-10">
+              <div
+                id={CONTACT_FORM_ID}
+                className="lg:col-span-3 rounded-2xl border bg-card p-6 md:p-10"
+              >
                 <h2 className="text-xl font-bold text-foreground mb-1">
                   Send us the details
                 </h2>
@@ -384,11 +423,15 @@ const Contact = () => {
                     Jump straight into a demo request if you would rather see
                     the product with your own use case in mind.
                   </p>
-                  <Button variant="outline" size="sm" className="gap-2" asChild>
-                    <Link to={PUBLIC_CTA_PATHS.requestDemo}>
-                      Request a Demo
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="gap-2"
+                    type="button"
+                    onClick={() => switchContactIntent(CONTACT_INTENTS.demo)}
+                  >
+                    Switch to Demo Request
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </Button>
                 </div>
 

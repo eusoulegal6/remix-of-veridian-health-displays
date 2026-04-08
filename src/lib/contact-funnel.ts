@@ -8,6 +8,8 @@ export const CONTACT_INTENTS = {
   other: "other",
 } as const;
 
+export const CONTACT_FORM_ID = "contact-form";
+
 export type ContactIntent =
   (typeof CONTACT_INTENTS)[keyof typeof CONTACT_INTENTS];
 
@@ -218,3 +220,23 @@ export const createContactSubmissionFields = (
   submittedAt: new Date().toISOString(),
 });
 
+export const scrollToContactForm = () => {
+  if (typeof document === "undefined") {
+    return;
+  }
+
+  const formContainer = document.getElementById(CONTACT_FORM_ID);
+  if (!formContainer) {
+    return;
+  }
+
+  formContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  const focusTarget = formContainer.querySelector<HTMLElement>(
+    "input, textarea, button, [role='combobox']",
+  );
+
+  window.setTimeout(() => {
+    focusTarget?.focus();
+  }, 200);
+};

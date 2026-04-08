@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { scrollToContactForm } from "@/lib/contact-funnel";
 import {
   MAIN_NAV_LINKS,
   PUBLIC_CTA_PATHS,
@@ -16,6 +17,13 @@ const Header = () => {
   const [mobileUseCasesOpen, setMobileUseCasesOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+  const isContactPage = location.pathname === PUBLIC_PATHS.contact;
+
+  const handleContactPageDemoAction = () => {
+    setMobileOpen(false);
+    setMobileUseCasesOpen(false);
+    scrollToContactForm();
+  };
 
   useEffect(() => {
     setMobileOpen(false);
@@ -92,9 +100,15 @@ const Header = () => {
           <Button variant="ghost" size="sm" asChild>
             <Link to={PUBLIC_CTA_PATHS.pricing}>Pricing</Link>
           </Button>
-          <Button size="sm" asChild>
-            <Link to={PUBLIC_CTA_PATHS.bookDemo}>Book Demo</Link>
-          </Button>
+          {isContactPage ? (
+            <Button size="sm" type="button" onClick={handleContactPageDemoAction}>
+              Open Demo Form
+            </Button>
+          ) : (
+            <Button size="sm" asChild>
+              <Link to={PUBLIC_CTA_PATHS.bookDemo}>Book Demo</Link>
+            </Button>
+          )}
         </div>
 
         <button
@@ -156,9 +170,15 @@ const Header = () => {
               <Button variant="outline" size="sm" asChild>
                 <Link to={PUBLIC_CTA_PATHS.pricing}>Pricing</Link>
               </Button>
-              <Button size="sm" asChild>
-                <Link to={PUBLIC_CTA_PATHS.bookDemo}>Book Demo</Link>
-              </Button>
+              {isContactPage ? (
+                <Button size="sm" type="button" onClick={handleContactPageDemoAction}>
+                  Open Demo Form
+                </Button>
+              ) : (
+                <Button size="sm" asChild>
+                  <Link to={PUBLIC_CTA_PATHS.bookDemo}>Book Demo</Link>
+                </Button>
+              )}
             </div>
           </div>
         </div>
