@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vitaly-message-hub.lovable.app/sitemap.xml
+Sitemap: https://vital-message-hub.lovable.app/sitemap.xml

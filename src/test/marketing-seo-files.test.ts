@@ -24,18 +24,18 @@ describe("marketing SEO files", () => {
   });
 
   it("renders production-ready sitemap.xml and robots.txt content", () => {
-    const sitemap = createSitemapXml("https://vitaly-message-hub.lovable.app");
-    const robots = createRobotsTxt("https://vitaly-message-hub.lovable.app");
+    const sitemap = createSitemapXml("https://vital-message-hub.lovable.app");
+    const robots = createRobotsTxt("https://vital-message-hub.lovable.app");
 
     expect(sitemap).toContain(
-      "<loc>https://vitaly-message-hub.lovable.app/features</loc>",
+      "<loc>https://vital-message-hub.lovable.app/features</loc>",
     );
     expect(sitemap).toContain(
-      "<loc>https://vitaly-message-hub.lovable.app/contact</loc>",
+      "<loc>https://vital-message-hub.lovable.app/contact</loc>",
     );
     expect(robots).toContain("User-agent: *");
     expect(robots).toContain(
-      "Sitemap: https://vitaly-message-hub.lovable.app/sitemap.xml",
+      "Sitemap: https://vital-message-hub.lovable.app/sitemap.xml",
     );
   });
 });
