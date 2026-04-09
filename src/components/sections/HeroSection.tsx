@@ -46,7 +46,7 @@ const HeroSection = () => {
             <Button
               size="lg"
               variant="outline"
-              className="px-8 text-base gap-2 border-white/30 text-white hover:bg-white/10 hover:text-white"
+              className="px-8 text-base gap-2 bg-transparent border-white/30 text-white hover:bg-white/10 hover:text-white"
               asChild
             >
               <Link to={PUBLIC_PATHS.features}>
