@@ -37,7 +37,7 @@ type LinkDescriptor = {
 
 export const MARKETING_SITE = {
   name: "MedScreen",
-  siteUrl: "https://vital-message-hub.lovable.app",
+  siteUrl: "https://vitaly-message-hub.lovable.app",
   defaultTitle: "MedScreen | Smarter Screens for Better Care",
   defaultDescription:
     "MedScreen is a premium digital signage platform for hospitals, clinics, waiting rooms, and dental offices.",
