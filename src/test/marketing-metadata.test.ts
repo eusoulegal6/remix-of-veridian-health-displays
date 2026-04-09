@@ -29,7 +29,9 @@ describe("resolveMarketingMetadata", () => {
     expect(metadata.twitter.description).toBe(
       "Explore scheduling, screen control, and playlists.",
     );
-    expect(metadata.openGraph.image).toBe(MARKETING_SITE.defaultSocialImage);
+    expect(metadata.openGraph.image).toBe(
+      `${MARKETING_SITE.siteUrl}${MARKETING_SITE.defaultSocialImage}`,
+    );
   });
 
   it("allows page-level social overrides", () => {
