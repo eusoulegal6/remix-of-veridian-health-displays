@@ -14,7 +14,7 @@ describe("resolveMarketingMetadata", () => {
       },
       {
         pathname: "/features",
-        siteUrl: "https://vital-message-hub.lovable.app",
+        siteUrl: "https://vitaly-message-hub.lovable.app",
       },
     );
 
@@ -23,7 +23,7 @@ describe("resolveMarketingMetadata", () => {
       "Explore scheduling, screen control, and playlists.",
     );
     expect(metadata.canonical).toBe(
-      "https://vital-message-hub.lovable.app/features",
+      "https://vitaly-message-hub.lovable.app/features",
     );
     expect(metadata.openGraph.title).toBe("Features | MedScreen");
     expect(metadata.twitter.description).toBe(
@@ -49,16 +49,16 @@ describe("resolveMarketingMetadata", () => {
         },
       },
       {
-        siteUrl: "https://vital-message-hub.lovable.app/",
+        siteUrl: "https://vitaly-message-hub.lovable.app/",
       },
     );
 
-    expect(metadata.canonical).toBe("https://vital-message-hub.lovable.app/");
+    expect(metadata.canonical).toBe("https://vitaly-message-hub.lovable.app/");
     expect(metadata.openGraph.title).toBe(
       "Healthcare Digital Signage | MedScreen",
     );
     expect(metadata.openGraph.image).toBe(
-      "https://vital-message-hub.lovable.app/images/og-home.png",
+      "https://vitaly-message-hub.lovable.app/images/og-home.png",
     );
     expect(metadata.twitter.title).toBe("MedScreen on X");
     expect(metadata.twitter.image).toBe(
